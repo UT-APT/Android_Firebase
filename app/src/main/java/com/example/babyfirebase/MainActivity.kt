@@ -11,6 +11,8 @@ import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
+    
+
     // [START declare_auth]
     private lateinit var auth: FirebaseAuth
     // [END declare_auth]
