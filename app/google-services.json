@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "329371523755",
+    "project_id": "adroit-bonsai-343303",
+    "storage_bucket": "adroit-bonsai-343303.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:329371523755:android:75c982ada1deb428f335ee",
+        "android_client_info": {
+          "package_name": "com.example.babyfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "329371523755-ao5u8r9vuodo09u9nv6cj12k8ci4jftk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARgWpoDEa7iljlW3I9mKtIhA77pTS-YGc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "329371523755-ao5u8r9vuodo09u9nv6cj12k8ci4jftk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
