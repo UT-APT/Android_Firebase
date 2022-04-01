@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         signInButton = findViewById(R.id.signInButton)
         signOutButton = findViewById(R.id.signOutButton)
         signInButton.setOnClickListener { startSignIn() }
-
+        signOutButton.setOnClickListener { signOut() }
     }
 
 //    private fun createSignInIntent() {
@@ -88,15 +88,14 @@ class MainActivity : AppCompatActivity() {
     }
     // [END auth_fui_result]
 
-//    private fun signOut() {
-//        // [START auth_fui_signout]
-//        AuthUI.getInstance()
-//            .signOut(this)
-//            .addOnCompleteListener {
-//                // ...
-//            }
-//        // [END auth_fui_signout]
-//    }
+    private fun signOut() {
+        // [START auth_fui_signout]
+        AuthUI.getInstance()
+            .signOut(this)
+        // [END auth_fui_signout]
+
+        updateUI(null)
+    }
 
     // [START on_start_check_user]
 //    public override fun onStart() {
@@ -185,11 +184,13 @@ class MainActivity : AppCompatActivity() {
         if (user != null) {
             signInButton.visibility = View.GONE
             signOutButton.visibility = View.VISIBLE
-            Toast.makeText(this, "Signed in", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Signed in", Toast.LENGTH_SHORT).show()
             Log.i("updateUI", "Signed in")
         }
         else {
-            Toast.makeText(this, "Not signed in", Toast.LENGTH_LONG).show()
+            signInButton.visibility = View.VISIBLE
+            signOutButton.visibility = View.GONE
+            Toast.makeText(this, "Not signed in", Toast.LENGTH_SHORT).show()
             Log.i("updateUI", "Not signed in")
         }
     }
