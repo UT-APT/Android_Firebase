@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
@@ -56,6 +57,9 @@ class MainActivity : AppCompatActivity() {
         signInButton.setOnClickListener { startSignIn() }
         signOutButton.setOnClickListener { signOut() }
 
+        googleSignInButton = findViewById(R.id.googleSignInButton)
+        googleSignInButton.setOnClickListener { googleSignIn() }
+
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))  // IDE will complain but was able to build and launch
             .requestEmail()
@@ -65,6 +69,16 @@ class MainActivity : AppCompatActivity() {
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
     }
+
+    private fun googleSignIn() {
+        val signInIntent = AuthUI.getInstance()
+            .createSignInIntentBuilder()
+            .setIsSmartLockEnabled(!BuildConfig.DEBUG)
+            .setAvailableProviders(listOf(AuthUI.IdpConfig.GoogleBuilder().build()))
+            .build()
+        signInLauncher.launch(signInIntent)
+    }
+
 
     private fun startSignIn() {
         val signInIntent = AuthUI.getInstance()
