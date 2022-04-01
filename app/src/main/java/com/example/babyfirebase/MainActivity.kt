@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     // [START declare_auth]
     private lateinit var auth: FirebaseAuth
     private lateinit var signInButton: Button
+    private lateinit var signOutButton: Button
     // [END declare_auth]
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         // [END initialize_auth]
 
         signInButton = findViewById(R.id.signInButton)
-        val signOutButton: Button = findViewById(R.id.signOutButton)
+        signOutButton = findViewById(R.id.signOutButton)
         signInButton.setOnClickListener { startSignIn() }
 
     }
@@ -183,6 +184,13 @@ class MainActivity : AppCompatActivity() {
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
             signInButton.visibility = View.GONE
+            signOutButton.visibility = View.VISIBLE
+            Toast.makeText(this, "Signed in", Toast.LENGTH_LONG).show()
+            Log.i("updateUI", "Signed in")
+        }
+        else {
+            Toast.makeText(this, "Not signed in", Toast.LENGTH_LONG).show()
+            Log.i("updateUI", "Not signed in")
         }
     }
 
