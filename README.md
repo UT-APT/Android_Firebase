@@ -7,3 +7,7 @@ Baby android app that (hopefully) does Firebase login
 - targetSdk: 31
 
 Runs on Pixel 5a (Android 12)
+
+## Notes
+- Don't save password on phone
+- Enable SHA1 fingerprint in firebase console
