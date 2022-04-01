@@ -9,6 +9,8 @@ import android.widget.Toast
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -25,11 +27,19 @@ class MainActivity : AppCompatActivity() {
     }
     // [END auth_fui_create_launcher]
 
+    // [START Google_sign_in_client]
+    private lateinit var googleSignInClient: GoogleSignInClient
+    // [END Google_sign_in_client]
+
     // [START declare_auth]
     private lateinit var auth: FirebaseAuth
+    // [END declare_auth]
+
+    // [START declare_buttons]
     private lateinit var signInButton: Button
     private lateinit var signOutButton: Button
-    // [END declare_auth]
+    private lateinit var googleSignInButton: Button
+    // [END declare_buttons]
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         signOutButton = findViewById(R.id.signOutButton)
         signInButton.setOnClickListener { startSignIn() }
         signOutButton.setOnClickListener { signOut() }
+
     }
 
     private fun startSignIn() {
