@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Baby Firebase</string>
+    <string name="sign_in">sign in</string>
+    <string name="sign_out">sign out</string>
 </resources>
