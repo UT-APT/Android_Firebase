@@ -46,25 +46,6 @@ class MainActivity : AppCompatActivity() {
         signOutButton.setOnClickListener { signOut() }
     }
 
-//    private fun createSignInIntent() {
-//        // [START auth_fui_create_intent]
-//        // Choose authentication providers
-//        val providers = arrayListOf(
-//            AuthUI.IdpConfig.EmailBuilder().build(),
-//            AuthUI.IdpConfig.PhoneBuilder().build(),
-//            AuthUI.IdpConfig.GoogleBuilder().build(),
-//            AuthUI.IdpConfig.FacebookBuilder().build(),
-//            AuthUI.IdpConfig.TwitterBuilder().build())
-//
-//        // Create and launch sign-in intent
-//        val signInIntent = AuthUI.getInstance()
-//            .createSignInIntentBuilder()
-//            .setAvailableProviders(providers)
-//            .build()
-//        signInLauncher.launch(signInIntent)
-//        // [END auth_fui_create_intent]
-//    }
-
     private fun startSignIn() {
         val signInIntent = AuthUI.getInstance()
             .createSignInIntentBuilder()
@@ -97,89 +78,6 @@ class MainActivity : AppCompatActivity() {
         updateUI(null)
     }
 
-    // [START on_start_check_user]
-//    public override fun onStart() {
-//        super.onStart()
-//        // Check if user is signed in (non-null) and update UI accordingly.
-//        val currentUser = auth.currentUser
-//        if(currentUser != null){
-//            reload()
-//        } else {
-//            // No user is signed in
-//        }
-//    }
-    // [END on_start_check_user]
-
-    private fun createAccount(email: String, password: String) {
-        // [START create_user_with_email]
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "createUserWithEmail:success")
-                    val user = auth.currentUser
-                    updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
-                    updateUI(null)
-                }
-            }
-        // [END create_user_with_email]
-    }
-
-    private fun signIn(email: String, password: String) {
-        // [START sign_in_with_email]
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithEmail:success")
-                    val user = auth.currentUser
-                    updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
-                    updateUI(null)
-                }
-            }
-        // [END sign_in_with_email]
-    }
-
-//    private fun sendEmailVerification() {
-//        // [START send_email_verification]
-//        val user = auth.currentUser!!
-//        user.sendEmailVerification()
-//            .addOnCompleteListener(this) { task ->
-//                // Email Verification sent
-//            }
-//        // [END send_email_verification]
-//    }
-
-//    private fun getUserProfile() {
-//        // [START get_user_profile]
-//        val user = Firebase.auth.currentUser
-//        user?.let {
-//            // Name, email address, and profile photo Url
-//            val name = user.displayName
-//            val email = user.email
-//            val photoUrl = user.photoUrl
-//
-//            // Check if user's email is verified
-//            val emailVerified = user.isEmailVerified
-//
-//            // The user's ID, unique to the Firebase project. Do NOT use this value to
-//            // authenticate with your backend server, if you have one. Use
-//            // FirebaseUser.getToken() instead.
-//            val uid = user.uid
-//        }
-//        // [END get_user_profile]
-//    }
-
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
             signInButton.visibility = View.GONE
@@ -195,11 +93,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun reload() {
-
-    }
-
-    companion object {
-        private const val TAG = "EmailPassword"
-    }
 }
