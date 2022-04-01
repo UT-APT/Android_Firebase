@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
@@ -55,6 +56,14 @@ class MainActivity : AppCompatActivity() {
         signInButton.setOnClickListener { startSignIn() }
         signOutButton.setOnClickListener { signOut() }
 
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))  // IDE will complain but was able to build and launch
+            .requestEmail()
+            .build()
+
+        // Toast.makeText(this, gso.toString(), Toast.LENGTH_LONG).show()
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
     }
 
     private fun startSignIn() {
