@@ -3,6 +3,7 @@ package com.example.babyfirebase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import com.firebase.ui.auth.AuthUI
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     // [START declare_auth]
     private lateinit var auth: FirebaseAuth
+    private lateinit var signInButton: Button
     // [END declare_auth]
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         auth = Firebase.auth
         // [END initialize_auth]
 
-        val signInButton: Button = findViewById(R.id.signInButton)
+        signInButton = findViewById(R.id.signInButton)
         val signOutButton: Button = findViewById(R.id.signOutButton)
         signInButton.setOnClickListener { startSignIn() }
 
@@ -65,6 +67,7 @@ class MainActivity : AppCompatActivity() {
     private fun startSignIn() {
         val signInIntent = AuthUI.getInstance()
             .createSignInIntentBuilder()
+            .setIsSmartLockEnabled(!BuildConfig.DEBUG)
             .setAvailableProviders(listOf(AuthUI.IdpConfig.EmailBuilder().build()))
             .build()
         signInLauncher.launch(signInIntent)
@@ -76,12 +79,10 @@ class MainActivity : AppCompatActivity() {
         if (result.resultCode == RESULT_OK) {
             // Successfully signed in
             val user = FirebaseAuth.getInstance().currentUser
+            updateUI(user)
             // ...
         } else {
-            // Sign in failed. If response is null the user canceled the
-            // sign-in flow using the back button. Otherwise check
-            // response.getError().getErrorCode() and handle the error.
-            // ...
+            Toast.makeText(this, "Sign In Failed", Toast.LENGTH_SHORT).show()
         }
     }
     // [END auth_fui_result]
@@ -180,7 +181,9 @@ class MainActivity : AppCompatActivity() {
 //    }
 
     private fun updateUI(user: FirebaseUser?) {
-
+        if (user != null) {
+            signInButton.visibility = View.GONE
+        }
     }
 
     private fun reload() {
